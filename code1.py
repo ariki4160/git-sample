@@ -5,6 +5,8 @@ def main():
 
     if now_day <= 10:
         print('上旬です')
+    elif now_day >= 20:
+        print('下旬です')
 
 if __name__ == '__main__':
     main()
