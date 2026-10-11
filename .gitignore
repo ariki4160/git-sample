@@ -1,0 +1,5 @@
+# エディタ設定
+.vscode/
+
+# macOS
+.DS_Store
