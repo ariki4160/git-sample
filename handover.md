@@ -96,18 +96,23 @@ GitHub の基本ワークフロー（ブランチ・コミット・PR・マー�
 
 ## 残作業・既知の状態
 
-### 未削除のリモートブランチ（掃除候補）
+### リモートブランチの掃除（完了済み）
 
-PR マージ後も以下のブランチがリモートに残っている。不要なら削除してよい。
+以前リモートに残っていた作業ブランチは、`main` へマージ済み（未マージコミットなし）を
+確認のうえ削除済み。現在リモートに残っているのは `main` のみ。
 
-- `origin/ariki-tomono_work` — PR #3（マージ済み）の作業ブランチ
-- `origin/test_branch_01` — 検証用に作成したブランチ
+- ~~`origin/ariki-tomono_work`~~ — PR #3（マージ済み）の作業ブランチ → **削除済み**
+- ~~`origin/test_branch_01`~~ — 検証用に作成したブランチ → **削除済み**
 
-削除する場合の例:
+参考: 削除に使ったコマンド。
 
 ```bash
-git push origin --delete ariki-tomono_work
-git push origin --delete test_branch_01
+# 事前にマージ済みを確認
+git log --oneline origin/main..origin/ariki-tomono_work   # 出力が空ならマージ済み
+git log --oneline origin/main..origin/test_branch_01
+
+# 削除
+git push origin --delete ariki-tomono_work test_branch_01
 # ローカルの追跡参照も掃除
 git fetch --prune
 ```
@@ -118,7 +123,6 @@ git fetch --prune
 
 基本ワークフローの確認は完了済み。さらに試すなら以下が候補。
 
-- 上記の**残ブランチの削除**とリポジトリの整理
 - **fork からのPR**の動作確認（これまではコラボレータの同一リポ内ブランチ方式のみ）
 - **Squash / Rebase マージ**など、マージコミット方式以外の確認
 - **コンフリクト発生 → 解消** の流れの確認
